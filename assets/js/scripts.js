@@ -1070,14 +1070,14 @@ $(window).on("load", function () {
 
     $('#contact-form').on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
-            var url = "contact.php";
+            var url = "backend/public/api/contact";
 
             $.ajax({
                 type: "POST",
                 url: url,
                 data: $(this).serialize(),
                 success: function (data) {
-                    var messageAlert = 'alert-' + data.type;
+                    var messageAlert = 'alert-' + (data.status === 'success' ? 'success' : 'danger');
                     var messageText = data.message;
 
                     var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
@@ -1085,6 +1085,17 @@ $(window).on("load", function () {
                         $('#contact-form').find('.messages').html(alertBox);
                         $('#contact-form')[0].reset();
                     }
+                },
+                error: function (xhr) {
+                    var messageAlert = 'alert-danger';
+                    var messageText = 'Something went wrong. Please try again.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        messageText = xhr.responseJSON.message;
+                    }
+
+                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                    $('#contact-form').find('.messages').html(alertBox);
                 }
             });
             return false;

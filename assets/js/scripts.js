@@ -56,7 +56,7 @@ $(function () {
         function toggleLocalStorageItem() {
             if (isLight()) {
                 localStorage.removeItem("light-mode");
-                $(".navbar .logo img , footer .logo img").attr("src", "assets/imgs/logo.png");
+                $(".navbar .logo img , footer .logo img").attr("src", "https://res.cloudinary.com/djme9spdc/image/upload/v1788377581/logo_k9vp0v.png");
             } else {
                 localStorage.setItem("light-mode", "set");
                 $(".navbar .logo img , footer .logo img").attr("src", "assets/imgs/logo-dark.svg");

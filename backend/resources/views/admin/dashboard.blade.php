@@ -11,24 +11,18 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="admin-card">
-                <h3>Total Projects</h3>
-                <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::count() }}</p>
-            </div>
+    <div class="stats-row">
+        <div class="admin-card stat-card">
+            <h3>Total Projects</h3>
+            <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::count() }}</p>
         </div>
-        <div class="col-md-4">
-            <div class="admin-card">
-                <h3>Published</h3>
-                <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::where('is_published', true)->count() }}</p>
-            </div>
+        <div class="admin-card stat-card">
+            <h3>Published</h3>
+            <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::where('is_published', true)->count() }}</p>
         </div>
-        <div class="col-md-4">
-            <div class="admin-card">
-                <h3>Drafts</h3>
-                <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::where('is_published', false)->count() }}</p>
-            </div>
+        <div class="admin-card stat-card">
+            <h3>Drafts</h3>
+            <p style="font-size: 36px; font-weight: 500; margin: 0;">{{ \App\Models\Project::where('is_published', false)->count() }}</p>
         </div>
     </div>
 

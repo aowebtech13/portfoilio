@@ -101,7 +101,7 @@
     <div class="login-page">
         <div class="login-card">
             <div class="logo">
-                <img src="{{ asset('assets/imgs/logo.png') }}" alt="Ao webtech">
+                <img src="{{ asset('https://res.cloudinary.com/djme9spdc/image/upload/v1788377581/logo_k9vp0v.png') }}" alt="Ao webtech">
             </div>
             <h2>Welcome Back</h2>
             <p>Sign in to your admin account</p>

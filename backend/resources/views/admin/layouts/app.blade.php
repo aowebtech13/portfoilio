@@ -71,6 +71,17 @@
             padding: 25px;
             margin-bottom: 25px;
         }
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        .stats-row .stat-card {
+            flex: 1 1 0;
+            min-width: 220px;
+            margin-bottom: 0;
+        }
         .admin-card h3 {
             font-size: 18px;
             margin-bottom: 20px;
@@ -213,7 +224,7 @@
     <aside class="admin-sidebar">
         <div class="logo">
             <a href="{{ route('admin.dashboard') }}">
-                <img src="{{ asset('assets/imgs/logo.png') }}" alt="Logo">
+                <img src="{{ asset('https://res.cloudinary.com/djme9spdc/image/upload/v1788377581/logo_k9vp0v.png') }}" alt="Logo">
             </a>
         </div>
         <nav>

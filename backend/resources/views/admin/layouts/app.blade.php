@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
+        body {
+            color: #fff;
+            background: #0f0f0f;
+        }
         .admin-sidebar {
             position: fixed;
             top: 0;
@@ -81,6 +85,10 @@
             flex: 1 1 0;
             min-width: 220px;
             margin-bottom: 0;
+        }
+        .stats-row .stat-card h3,
+        .stats-row .stat-card p {
+            color: #fff;
         }
         .admin-card h3 {
             font-size: 18px;

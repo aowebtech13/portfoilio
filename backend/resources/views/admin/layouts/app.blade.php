@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
         body {
-            color: #fff;
+            color: #00e5ff;
             background: #0f0f0f;
         }
         .admin-sidebar {
@@ -34,7 +34,7 @@
             display: flex;
             align-items: center;
             padding: 12px 25px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(0, 229, 255, 0.7);
             text-decoration: none;
             font-size: 14px;
             transition: all 0.3s;
@@ -42,7 +42,7 @@
         }
         .admin-sidebar nav a:hover,
         .admin-sidebar nav a.active {
-            color: #fff;
+            color: #00e5ff;
             background: rgba(255,255,255,0.05);
             border-left-color: #ff8743;
         }
@@ -88,12 +88,13 @@
         }
         .stats-row .stat-card h3,
         .stats-row .stat-card p {
-            color: #fff;
+            color: #00e5ff;
         }
         .admin-card h3 {
             font-size: 18px;
             margin-bottom: 20px;
             font-weight: 500;
+            color: #00e5ff;
         }
         .btn {
             display: inline-flex;
@@ -144,13 +145,14 @@
         }
         table th {
             font-weight: 500;
-            color: rgba(255,255,255,0.7);
+            color: rgba(0, 229, 255, 0.7);
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         table td {
             font-size: 14px;
+            color: #00e5ff;
         }
         .badge {
             display: inline-block;
@@ -176,6 +178,7 @@
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 500;
+            color: #00e5ff;
         }
         .form-group input,
         .form-group textarea,
@@ -185,9 +188,14 @@
             background: #222;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 5px;
-            color: #fff;
+            color: #00e5ff;
             font-size: 14px;
             font-family: inherit;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #00e5ff;
+            opacity: 0.6;
         }
         .form-group input:focus,
         .form-group textarea:focus,

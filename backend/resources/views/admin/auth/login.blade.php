@@ -14,6 +14,7 @@
             justify-content: center;
             background: #161616;
             padding: 20px;
+            color: #00e5ff;
         }
         .login-card {
             background: #1a1a1a;
@@ -35,10 +36,11 @@
             font-size: 24px;
             margin-bottom: 10px;
             font-weight: 500;
+            color: #00e5ff;
         }
         .login-card p {
             text-align: center;
-            color: rgba(255,255,255,0.6);
+            color: #00e5ff;
             margin-bottom: 30px;
             font-size: 14px;
         }
@@ -50,6 +52,7 @@
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 500;
+            color: #00e5ff;
         }
         .form-group input {
             width: 100%;
@@ -57,9 +60,13 @@
             background: #222;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
-            color: #fff;
+            color: #00e5ff;
             font-size: 15px;
             font-family: inherit;
+        }
+        .form-group input::placeholder {
+            color: #00e5ff;
+            opacity: 0.6;
         }
         .form-group input:focus {
             outline: none;

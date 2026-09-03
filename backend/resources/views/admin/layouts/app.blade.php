@@ -240,7 +240,7 @@
     <aside class="admin-sidebar">
         <div class="logo">
             <a href="{{ route('admin.dashboard') }}">
-                <img src="{{ asset('https://res.cloudinary.com/djme9spdc/image/upload/v1788377581/logo_k9vp0v.png') }}" alt="Logo">
+                <img src="{{ asset('https://res.cloudinary.com/dqi7g7lky/image/upload/v1788465385/swlfie_oc610k.png') }}" alt="Logo">
             </a>
         </div>
         <nav>

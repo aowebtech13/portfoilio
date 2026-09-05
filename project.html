@@ -341,79 +341,13 @@
         <div class="inter-links-center d-flex align-items-center">
             <div class="container">
                 <div class="links-text">
-                    <ul class="rest">
-                        <li data-tab="tab-1">
-                            <h2>
-                                <span class="num">01.</span>
-                                <a href="#"><span class="tag">Design</span> <span class="text">Sunshine</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-2">
-                            <h2>
-                                <span class="num">02.</span>
-                                <a href="#"><span class="tag">Branding</span> <span class="text">Who
-                                        dares
-                                        wins</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-3">
-                            <h2>
-                                <span class="num">03.</span>
-                                <a href="#"><span class="tag">Branding</span> <span class="text">Fountain studio</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-4">
-                            <h2>
-                                <span class="num">04.</span>
-                                <a href="#"><span class="tag">Photography</span> <span class="text">Willow flower</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-5">
-                            <h2>
-                                <span class="num">05.</span>
-                                <a href="#"><span class="tag">Design</span> <span class="text">Step
-                                        over</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-6">
-                            <h2>
-                                <span class="num">06.</span>
-                                <a href="#"><span class="tag">ART Design</span> <span class="text">Snowy
-                                        zero</span></a>
-                            </h2>
-                        </li>
-                        <li data-tab="tab-7">
-                            <h2>
-                                <span class="num">07.</span>
-                                <a href="#"><span class="tag">Branding</span> <span class="text">Fun
-                                        bike</span></a>
-                            </h2>
-                        </li>
+                    <ul class="rest" id="project-list">
+                        <!-- Projects loaded dynamically from API -->
                     </ul>
                 </div>
             </div>
-            <div class="links-img">
-                <div class="img" id="tab-1">
-                    <img src="assets/imgs/works/2/1.webp" alt="">
-                </div>
-                <div class="img" id="tab-2">
-                    <img src="assets/imgs/works/2/2.png" alt="">
-                </div>
-                <div class="img" id="tab-3">
-                    <img src="assets/imgs/works/2/12.webp" alt="">
-                </div>
-                <div class="img" id="tab-4">
-                    <img src="assets/imgs/works/2/6.webp" alt="">
-                </div>
-                <div class="img current" id="tab-5">
-                    <img src="assets/imgs/works/2/7.webp" alt="">
-                </div>
-                <div class="img" id="tab-6">
-                    <img src="assets/imgs/works/2/3.jpg" alt="">
-                </div>
-                <div class="img" id="tab-7">
-                    <img src="assets/imgs/works/2/8.webp" alt="">
-                </div>
+            <div class="links-img" id="project-images">
+                <!-- Project images loaded dynamically from API -->
             </div>
         </div>
 
@@ -433,6 +367,12 @@
 
 
 
+    <!-- env & api -->
+    <script src="env/env.js"></script>
+    <script src="env/env.dev.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/api.js"></script>
+
     <!-- jQuery -->
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/jquery-migrate-3.4.0.min.js"></script>
@@ -446,6 +386,101 @@
 
     <!-- custom scripts -->
     <script src="assets/js/scripts.js"></script>
+
+    <!-- dynamic projects loader -->
+    <script>
+    (function() {
+        'use strict';
+
+        function loadProjects() {
+            if (typeof AOWEB === 'undefined' || !AOWEB.api || !AOWEB.api.projects) {
+                setTimeout(loadProjects, 50);
+                return;
+            }
+
+            var listContainer = document.getElementById('project-list');
+            var imagesContainer = document.getElementById('project-images');
+
+            if (!listContainer || !imagesContainer) {
+                setTimeout(loadProjects, 50);
+                return;
+            }
+
+            AOWEB.api.projects.list().then(function(projects) {
+                if (!projects || projects.length === 0) {
+                    listContainer.innerHTML = '<li><h2><span class="num">--</span><a href="#"><span class="tag">Info</span> <span class="text">No projects found</span></a></h2></li>';
+                    return;
+                }
+
+                listContainer.innerHTML = '';
+                imagesContainer.innerHTML = '';
+
+                projects.forEach(function(project, index) {
+                    var num = String(index + 1).padStart(2, '0') + '.';
+                    var tabId = 'tab-' + (index + 1);
+                    var category = project.category || 'Project';
+                    var title = project.title || 'Untitled';
+                    var heroImage = project.hero_image || 'assets/imgs/works/2/1.webp';
+
+                    var li = document.createElement('li');
+                    li.setAttribute('data-tab', tabId);
+                    if (index === 0) li.classList.add('current');
+                    li.innerHTML = '<h2><span class="num">' + num + '</span><a href="#"><span class="tag">' + category + '</span> <span class="text">' + title + '</span></a></h2>';
+                    listContainer.appendChild(li);
+
+                    var imgDiv = document.createElement('div');
+                    imgDiv.classList.add('img');
+                    if (index === 0) imgDiv.classList.add('current');
+                    imgDiv.setAttribute('id', tabId);
+                    imgDiv.innerHTML = '<img src="' + heroImage + '" alt="' + title + '">';
+                    imagesContainer.appendChild(imgDiv);
+                });
+
+                // Re-attach tab switching behavior using event delegation
+                var linksText = document.querySelector('.inter-links-center .links-text');
+                if (linksText) {
+                    linksText.addEventListener('mouseenter', function(e) {
+                        var li = e.target.closest('li');
+                        if (!li) return;
+                        var tab_id = li.getAttribute('data-tab');
+                        if (!tab_id) return;
+
+                        var allLis = linksText.querySelectorAll('li');
+                        allLis.forEach(function(item) { item.classList.remove('current'); });
+                        li.classList.add('current');
+
+                        var allImgs = document.querySelectorAll('.links-img .img');
+                        allImgs.forEach(function(img) { img.classList.remove('current'); });
+                        var targetImg = document.getElementById(tab_id);
+                        if (targetImg) targetImg.classList.add('current');
+                    }, true);
+
+                    linksText.addEventListener('mouseenter', function(e) {
+                        var li = e.target.closest('li');
+                        if (!li) return;
+                        var siblings = li.parentElement.querySelectorAll('li');
+                        siblings.forEach(function(sibling) { sibling.classList.add('no-active'); });
+                        li.classList.remove('no-active');
+                    }, true);
+
+                    linksText.addEventListener('mouseleave', function() {
+                        var allLis = linksText.querySelectorAll('li');
+                        allLis.forEach(function(item) { item.classList.remove('no-active'); });
+                    });
+                }
+            }).catch(function(error) {
+                console.error('Failed to load projects:', error);
+                listContainer.innerHTML = '<li><h2><span class="num">--</span><a href="#"><span class="tag">Error</span> <span class="text">Could not load projects</span></a></h2></li>';
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadProjects);
+        } else {
+            loadProjects();
+        }
+    })();
+    </script>
 
 </body>
 
